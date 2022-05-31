@@ -16,24 +16,17 @@ pip3 --no-cache-dir install -r requirements.txt
 2. Change Origin to random value / True
 
 ## Vulnerable Packages
-<br/>
+flask-cors@3.0.8 <br/>
+Jinja2@2.11.2
 
-```flask-cors@3.0.8 --> flask-cors@3.0.9```
-<br/>
-<br/>
-
-### Directory Traversal
-<br/>
-<br/>
+###[Directory Traversal]
+```flask-cors@3.0.8 --> flask-cors@3.0.9```  <br/>
 https://cwe.mitre.org/data/definitions/22.html <br/>
 https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25032 <br/>
 https://security.snyk.io/vuln/SNYK-PYTHON-FLASKCORS-608972 <br/>
-<br/>
 
-```Jinja2@2.11.2 --> jinja2@2.11.3```
-<br/>
-<br/>
-### Regular Expression Denial of Service (ReDoS)
+### [Regular Expression Denial of Service (ReDoS)]
+```Jinja2@2.11.2 --> jinja2@2.11.3```  <br/>
 https://cwe.mitre.org/data/definitions/400.html <br/>
 https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28493 <br/>
 https://security.snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994 <br/>
