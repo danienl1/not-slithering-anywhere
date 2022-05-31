@@ -5,24 +5,26 @@ from flask_cors import CORS
 import ast
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 
 
 class PostBackup(object):
     def __init__(self, posts):
-        self.posts  = {}
+        self.posts = {}
 
         if type(posts) is dict:
             self.posts = posts
         else:
-            for  post in posts:
+            for post in posts:
                 self.posts[post.postid] = dict(userid=post.userid,
                                                post=post)
 
-    def  __reduce__(self):
-        return (self.__class__,(self.posts,))
+    def __reduce__(self):
+        return (self.__class__, (self.posts,))
 
 
 from app import routes, models
+
+#tom OR '1'='1'
