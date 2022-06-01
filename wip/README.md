@@ -33,7 +33,7 @@ https://security.snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994 <br/>
 
 
 
-## Routes.py, Line 263
+## Routes.py, Line 263, 30
 Methodology </br>
 https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection </br>
 https://medium.com/@nyomanpradipta120/ssti-in-flask-jinja2-20b068fdaeee </br>
