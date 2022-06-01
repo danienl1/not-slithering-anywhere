@@ -11,6 +11,11 @@ source ~/.venv/wip/bin/activate
 pip3 --no-cache-dir install -r requirements.txt 
 -->
 
+## General Testing
+1. docker run --rm -t -v $(pwd):/home/repo coinbase/salus
+2. snyk code test 
+3. semgrep --config p/minusworld.flask-xss
+
 ## Testing for CORS
 1. Run CORScanner https://github.com/chenjj/CORScanner
 2. Change Origin to random value / True
@@ -49,6 +54,11 @@ https://semgrep.dev/docs/cheat-sheets/flask-xss/ </br>
 Fix 
 
 
+## ISSUES 
 
-## XSS
-semgrep --config p/minusworld.flask-xss
+Open Redirect </br>
+https://learn.snyk.io/lessons/open-redirect/python/
+
+Deserialization of Untrusted Data </br>
+
+Path Traversal </br>

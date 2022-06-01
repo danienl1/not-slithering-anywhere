@@ -12,7 +12,6 @@ import uuid
 import re
 import pickle
 
-
 app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
 CORS(app)
@@ -33,6 +32,7 @@ def hello():
     # print(Person.query.filter_by(username="test").first())
     return "<h1>hi</h1>"
 
+
 uid_re = re.compile("[a-zA-Z0-9\-]*")
 
 
@@ -42,6 +42,7 @@ def auth_required(func):
         if 'authd' not in session:
             return redirect('/login')
         return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -54,7 +55,10 @@ def index():
     message = request.args.get('message') or None
 
     if message is not None:
-        return render_template_string(message)
+        # TODO
+        # return render_template_string(message)
+        context = {'message': message}
+        return render_template_string('main.html', **context)
 
     if returnUrl is not None:
         return redirect(returnUrl)
@@ -111,7 +115,7 @@ def posts():
 def posts_backup():
     from models import Post
 
-    if 'authd' not  in session:
+    if 'authd' not in session:
         return redirect('/login')
 
     posts = Post.query.all()
@@ -126,7 +130,6 @@ def posts_backup():
 
 @app.route("/posts/backup_verify", methods=["GET", "POST"])
 def posts_backup_verify():
-
     if request.method == 'POST':
         if 'backup' not in request.files:
             return render_template('upload.html',
@@ -139,7 +142,7 @@ def posts_backup_verify():
                                    message="upload verified successfully")
         except Exception as e:
             return render_template('upload.html'),
-                                   #message=e)
+            # message=e)
     else:
         return render_template('upload.html')
 
@@ -153,7 +156,6 @@ def posts_person(person):
 
 @app.route('/people')
 def people():
-
     query_prefix = "SELECT * FROM person WHERE username like '%"
 
     if 'authd' not in session:
@@ -172,7 +174,6 @@ def people():
 @app.route('/people/<uid>')
 @auth_required
 def people_by_id(uid):
-
     query = "SELECT * FROM person WHERE userid = :userid"
 
     res = uid_re.search(uid)
@@ -182,7 +183,7 @@ def people_by_id(uid):
     if res.end() == 0:
         people = []
     else:
-        people = db.session.execute(query, {"userid":uid})
+        people = db.session.execute(query, {"userid": uid})
 
     return render_template("people_search.html",
                            people=people)
@@ -255,14 +256,18 @@ def login():
 @app.route("/logout")
 def logout():
     if 'username' in session:
-        del(session['username'])
+        del (session['username'])
     if 'authd' in session:
-        del(session['authd'])
+        del (session['authd'])
 
     if 'message' in request.args:
-        return render_template_string(request.args.get("message"))
+        # TODO
+        # return render_template_string(request.args.get("message"))
+        context = {'message': request.args.get('message')}
+        return render_template_string('main.html', **context)
 
     return redirect('/login')
+
 
 if __name__ == '__main__':
     # import boiler

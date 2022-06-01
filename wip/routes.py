@@ -22,7 +22,7 @@ def auth_required(func):
 def index():
     if 'authd' not in session:
         return redirect('/login')
-
+    print("@@@@@@@@@@@@@@")
     returnUrl = request.args.get('returnURL') or None
     message = request.args.get('message') or None
 
@@ -34,7 +34,7 @@ def index():
         return render_template_string('main.html', **context)
 
     if returnUrl is not None:
-        return redirect(returnUrl)
+        return redirect(url_for(returnUrl))
 
     return render_template("main.html")
 
