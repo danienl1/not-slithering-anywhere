@@ -1,3 +1,4 @@
+import json
 import os
 
 from flask import Flask
@@ -11,6 +12,8 @@ from functools import wraps
 import uuid
 import re
 import pickle
+from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
@@ -136,8 +139,15 @@ def posts_backup_verify():
                                    message='file not uploaded')
 
         fh = request.files['backup']
+        filename = secure_filename(fh.filename)
         try:
-            posts = pickle.load(fh)
+            #posts = pickle.load(fh)
+            # TODO
+            #posts = pickle.load(filename)
+
+            # DON'T use pickle to deserialize user inputs
+            posts = json.load(filename)
+
             return render_template('upload.html',
                                    message="upload verified successfully")
         except Exception as e:

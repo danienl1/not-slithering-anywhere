@@ -15,6 +15,7 @@ pip3 --no-cache-dir install -r requirements.txt
 1. docker run --rm -t -v $(pwd):/home/repo coinbase/salus
 2. snyk code test 
 3. semgrep --config p/minusworld.flask-xss
+4. bandit -r ~/workspaces/not-slithering-anywhere/
 
 ## Testing for CORS
 1. Run CORScanner https://github.com/chenjj/CORScanner
@@ -51,7 +52,14 @@ https://semgrep.dev/docs/cheat-sheets/flask-xss/ </br>
     
 ![img.png](img.png)
 
-Fix 
+## routes.py, line 40, app.py line 64
+``` 
+from flask import url_for
+
+if returnUrl is not None:
+   return redirect(url_for('returnUrl'))
+```
+
 
 
 ## ISSUES 
@@ -61,5 +69,13 @@ https://learn.snyk.io/lessons/open-redirect/python/ </br>
 https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
 
 Deserialization of Untrusted Data </br>
+https://knowledge-base.secureflag.com/vulnerabilities/unsafe_deserialization/unsafe_deserialization_python.html </br>
+https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html </br>
+https://rules.sonarsource.com/python/RSPEC-5135
 
 Path Traversal </br>
+https://learn.snyk.io/lessons/directory-traversal/python/ </br>
+
+Pickles </br>
+https://medium.com/@abhishek.dev.kumar.94/sour-pickle-insecure-deserialization-with-python-pickle-module-efa812c0d565 </br>
+https://snyk.io/blog/guide-to-python-pickle/ </br>
