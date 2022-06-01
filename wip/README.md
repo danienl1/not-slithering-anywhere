@@ -57,7 +57,8 @@ Fix
 ## ISSUES 
 
 Open Redirect </br>
-https://learn.snyk.io/lessons/open-redirect/python/
+https://learn.snyk.io/lessons/open-redirect/python/ </br>
+https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
 
 Deserialization of Untrusted Data </br>
 

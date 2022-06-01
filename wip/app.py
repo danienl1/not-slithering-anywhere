@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import ast
 
-from flask import (render_template_string, request, render_template,
+from flask import (render_template_string, request, render_template, url_for,
                    redirect, session)
 from functools import wraps
 import uuid
@@ -61,7 +61,7 @@ def index():
         return render_template_string('main.html', **context)
 
     if returnUrl is not None:
-        return redirect(returnUrl)
+        return redirect(url_for('returnUrl'))
 
     return render_template("main.html")
 
