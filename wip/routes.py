@@ -27,7 +27,11 @@ def index():
     message = request.args.get('message') or None
 
     if message is not None:
-        return render_template_string(message)
+        # return render_template_string(message)
+
+        # TODO
+        context = {'message': message}
+        return render_template_string('main.html', **context)
 
     if returnUrl is not None:
         return redirect(returnUrl)
@@ -231,15 +235,7 @@ def logout():
         del (session['authd'])
 
     if 'message' in request.args:
-        # ("{% extends 'core/page.html' %}", content="test")
-        context = {
-            'message': request.args.get('message'),
-            'url': request.url
-        }
-        ''' FIX '''
-        return render_template_string('register.html', **context), 200
-
-        # VULNERABLE
-        #return render_template_string(request.args.get("message"))
+        context = {'message': request.args.get('message')}
+        return render_template('register.html', **context)
 
     return redirect('/login')
